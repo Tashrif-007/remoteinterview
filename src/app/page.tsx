@@ -7,7 +7,11 @@ export default function Home() {
   return (
     <div className="m-10">
       <SignedOut>
-        <SignInButton />
+        <SignInButton>
+          <Button>
+            Sign In
+          </Button>
+        </SignInButton>
       </SignedOut>
       <SignedIn>
         <UserButton />
