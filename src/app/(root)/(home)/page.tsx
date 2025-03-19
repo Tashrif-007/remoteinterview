@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
-import MeetingModal from "../../../components/MeetinModal";
+import MeetingModal from "@/components/MeetinModal";
 
 export default function Home() {
   const {isInterviewer, isCandidate, isLoading} = useUserRole();
@@ -22,7 +22,7 @@ export default function Home() {
         setModalType("start");
         setShowModal(true);
         break;
-      case "New Interview":
+      case "Join Interview":
         setModalType("join");
         setShowModal(true);
         break;
