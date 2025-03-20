@@ -1,6 +1,9 @@
-import { useCall, VideoPreview } from "@stream-io/video-react-sdk";
+import { DeviceSettings, useCall, VideoPreview } from "@stream-io/video-react-sdk";
 import { useEffect, useState } from "react"
 import { Card } from "./ui/card";
+import { CameraIcon, MicIcon, SettingsIcon } from "lucide-react";
+import { Switch } from "./ui/switch";
+import { Button } from "./ui/button";
 
 const MeetingSetup = ({onSetupComplete}: {onSetupComplete: ()=> void}) => {
 
@@ -49,7 +52,78 @@ const MeetingSetup = ({onSetupComplete}: {onSetupComplete: ()=> void}) => {
                 <Card className="md:col-span-1 p-6">
                     <div className="h-full flex flex-col">
                         {/*Meeting details*/}
-                        
+                        <div>
+                            <h2 className="text-xl font-semibold mb-1">
+                                Meeting Details
+                            </h2>
+                            <p className="text-sm text-muted-foreground break-all">{call.id}</p>
+                        </div>
+
+                        <div className="flex-1 flex flex-col justify-between">
+                            <div className="space-y-6 mt-8">
+                                {/*camera control*/}
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                        <CameraIcon className="h-5 w-5 text-primary" />
+                                    </div>
+                                    <div>
+                                        <p className="font-medium">Camera</p>
+                                        <p className="text-sm text-muted-foreground">
+                                        {isCameraDisabled ? "Off" : "On"}
+                                        </p>
+                                    </div>
+                                    </div>
+                                    <Switch
+                                    checked={!isCameraDisabled}
+                                    onCheckedChange={(checked) => setIsCameraDisabled(!checked)}
+                                    />
+                                </div>
+
+                                {/* MIC CONTROL */}
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                        <MicIcon className="h-5 w-5 text-primary" />
+                                    </div>
+                                    <div>
+                                        <p className="font-medium">Microphone</p>
+                                        <p className="text-sm text-muted-foreground">
+                                        {isMicDisabled ? "Off" : "On"}
+                                        </p>
+                                    </div>
+                                    </div>
+                                    <Switch
+                                    checked={!isMicDisabled}
+                                    onCheckedChange={(checked) => setIsMicDisabled(!checked)}
+                                    />
+                                </div>
+
+                                 {/* DEVICE SETTINGS */}
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                        <SettingsIcon className="h-5 w-5 text-primary" />
+                                    </div>
+                                    <div>
+                                        <p className="font-medium">Settings</p>
+                                        <p className="text-sm text-muted-foreground">Configure devices</p>
+                                    </div>
+                                    </div>
+                                    <DeviceSettings />
+                                </div>
+                            </div>
+
+                            {/* JOIN BTN */}
+                            <div className="space-y-3 mt-8">
+                                <Button className="w-full" size="lg" onClick={handleJoinMeeting}>
+                                    Join Meeting
+                                </Button>
+                                <p className="text-xs text-center text-muted-foreground">
+                                    Do not worry, our team is super friendly! We want you to succeed. 🎉
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </Card>
             </div>
