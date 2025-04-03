@@ -39,3 +39,14 @@ export const getUserByClerkId = query({
         return user;
     }
 })
+
+export const updateRole = mutation({
+    args: {
+        id: v.id("users"),
+        role: v.union(v.literal("candidate"), v.literal("interviewer")), 
+    }, handler: async (ctx,args) => {
+        await ctx.db.patch(args.id, {
+            role: args.role
+        });
+    }
+})

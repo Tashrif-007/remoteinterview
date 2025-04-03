@@ -3,10 +3,11 @@ import localFont from "next/font/local";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
 import {ThemeProvider }from "../components/providers/ThemeProvider"
-import {  RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs";
+import {  RedirectToSignIn, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import ConvexClerkProvider from "../components/providers/ConvexClerkProvider";
 import Navbar from "../components/Navbar";
 import {Toaster} from 'react-hot-toast';
+import AuthRedirect from "../components/AuthRedirect";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         <SignedIn>
+        <AuthRedirect /> 
         <div className="min-h-screen">
           <Navbar />
           <main className="px-4 sm:px-6 lg:px-8">{children}</main>
